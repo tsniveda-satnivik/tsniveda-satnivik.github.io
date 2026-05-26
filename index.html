@@ -1,385 +1,497 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
+  <meta charset="UTF-8"/>
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Satnivik Tech — Coming Soon</title>
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+  <title>Satnivik Tech — Support Infrastructure Consulting</title>
+  <meta name="description" content="Satnivik Tech is a boutique support infrastructure consulting firm helping early-stage SaaS startups build scalable, efficient customer support systems. Zendesk, Freshdesk, Intercom, SOC2-aware, process design, SOP creation, and fractional support advisory."/>
+  <meta name="keywords" content="SaaS support consulting, support infrastructure, customer support setup, Zendesk consultant, Freshdesk setup, Intercom configuration, support operations, SOP design, escalation framework, early stage startup support, fractional support lead, SOC2 support, support audit, helpdesk consulting"/>
+  <link rel="preconnect" href="https://fonts.googleapis.com"/>
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;0,900;1,700&family=Outfit:wght@300;400;500;600&display=swap" rel="stylesheet"/>
   <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-
     :root {
-      --coral:      #FF6B4A;
-      --teal:       #2BBFA4;
-      --dark:       #1F2937;
-      --mid:        #6B7280;
-      --soft:       #F9FAFB;
-      --border:     #E5E7EB;
-      --white:      #FFFFFF;
+      --coral:#FF6B4A; --coral-light:#FFF0EC; --coral-mid:#FFD5CB;
+      --teal:#2BBFA4; --teal-light:#F0FAF8; --teal-mid:#A8EAE0;
+      --amber:#F59E0B; --amber-light:#FFFBEB;
+      --dark:#0F1923; --dark-2:#1F2937; --mid:#4B5563; --soft:#6B7280;
+      --border:#E5E7EB; --bg:#FAFAF9; --white:#FFFFFF;
     }
+    html { scroll-behavior: smooth; }
+    body { background:var(--bg); color:var(--dark); font-family:'Outfit',sans-serif; font-weight:300; -webkit-font-smoothing:antialiased; overflow-x:hidden; }
 
-    html, body {
-      height: 100%;
-      background: var(--white);
-      color: var(--dark);
-      font-family: 'DM Sans', sans-serif;
-      font-weight: 300;
-      -webkit-font-smoothing: antialiased;
-    }
+    /* NAV */
+    nav { position:fixed; top:0; left:0; right:0; z-index:100; display:flex; align-items:center; justify-content:space-between; padding:20px 60px; background:rgba(250,250,249,0.9); backdrop-filter:blur(14px); border-bottom:1px solid rgba(229,231,235,0.6); transition:padding 0.3s; }
+    nav.scrolled { padding:14px 60px; }
+    .nav-logo { display:flex; align-items:center; gap:12px; text-decoration:none; }
+    .nav-logo-text { font-family:'Playfair Display',serif; font-size:1.15rem; color:var(--dark); }
+    .nav-logo-text span { color:var(--coral); }
+    .nav-links { display:flex; align-items:center; gap:32px; list-style:none; }
+    .nav-links a { font-size:0.85rem; font-weight:500; color:var(--mid); text-decoration:none; transition:color 0.2s; }
+    .nav-links a:hover { color:var(--coral); }
+    .nav-cta { background:var(--dark); color:var(--white); padding:10px 22px; border-radius:6px; font-size:0.82rem; font-weight:500; text-decoration:none; transition:background 0.2s,transform 0.2s; }
+    .nav-cta:hover { background:var(--coral); transform:translateY(-1px); }
 
-    /* Subtle grain texture overlay */
-    body::before {
-      content: '';
-      position: fixed;
-      inset: 0;
-      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.03'/%3E%3C/svg%3E");
-      pointer-events: none;
-      z-index: 0;
-    }
+    /* HERO */
+    .hero { min-height:100vh; display:grid; grid-template-columns:1fr 1fr; align-items:center; padding:120px 60px 80px; gap:60px; position:relative; overflow:hidden; }
+    .hero::before { content:''; position:absolute; top:-100px; right:-100px; width:600px; height:600px; background:radial-gradient(circle,rgba(43,191,164,0.08) 0%,transparent 70%); pointer-events:none; }
+    .hero::after { content:''; position:absolute; bottom:-80px; left:20%; width:400px; height:400px; background:radial-gradient(circle,rgba(255,107,74,0.07) 0%,transparent 70%); pointer-events:none; }
+    .hero-left { position:relative; z-index:1; }
+    .hero-badge { display:inline-flex; align-items:center; gap:8px; background:var(--teal-light); border:1px solid var(--teal-mid); padding:6px 14px; border-radius:100px; font-size:0.72rem; font-weight:600; color:var(--teal); letter-spacing:0.12em; text-transform:uppercase; margin-bottom:28px; opacity:0; animation:fadeUp 0.7s ease forwards 0.1s; }
+    .hero-badge::before { content:''; width:6px; height:6px; border-radius:50%; background:var(--teal); animation:pulse 2s ease-in-out infinite; }
+    .hero h1 { font-family:'Playfair Display',serif; font-size:clamp(2.8rem,4.5vw,4.2rem); line-height:1.1; letter-spacing:-0.03em; color:var(--dark); margin-bottom:28px; opacity:0; animation:fadeUp 0.7s ease forwards 0.25s; }
+    .hero h1 em { font-style:italic; color:var(--coral); }
+    .hero h1 .lt { color:var(--teal); }
+    .hero-desc { font-size:1.05rem; line-height:1.8; color:var(--mid); max-width:480px; margin-bottom:44px; opacity:0; animation:fadeUp 0.7s ease forwards 0.4s; }
+    .hero-actions { display:flex; align-items:center; gap:16px; flex-wrap:wrap; opacity:0; animation:fadeUp 0.7s ease forwards 0.55s; }
+    .btn-primary { background:var(--coral); color:var(--white); padding:14px 28px; border-radius:8px; font-size:0.9rem; font-weight:600; text-decoration:none; transition:transform 0.2s,box-shadow 0.2s; box-shadow:0 4px 20px rgba(255,107,74,0.3); }
+    .btn-primary:hover { transform:translateY(-2px); box-shadow:0 8px 30px rgba(255,107,74,0.4); }
+    .btn-sec { color:var(--dark); font-size:0.9rem; font-weight:500; text-decoration:none; display:flex; align-items:center; gap:8px; transition:gap 0.2s; }
+    .btn-sec:hover { gap:12px; }
+    .btn-sec::after { content:'→'; }
+    .hero-stats { display:flex; gap:40px; margin-top:56px; padding-top:40px; border-top:1px solid var(--border); opacity:0; animation:fadeUp 0.7s ease forwards 0.7s; }
+    .stat-num { font-family:'Playfair Display',serif; font-size:2rem; font-weight:700; color:var(--dark); line-height:1; }
+    .stat-num span { color:var(--coral); }
+    .stat-label { font-size:0.78rem; color:var(--soft); margin-top:4px; line-height:1.4; }
+    .hero-right { position:relative; z-index:1; display:flex; align-items:center; justify-content:center; opacity:0; animation:fadeIn 1s ease forwards 0.6s; }
+    .hero-card { background:var(--white); border:1px solid var(--border); border-radius:20px; padding:36px; box-shadow:0 20px 60px rgba(15,25,35,0.08); width:100%; max-width:420px; position:relative; }
+    .hero-card-tag { display:inline-block; background:var(--coral-light); color:var(--coral); font-size:0.7rem; font-weight:600; letter-spacing:0.1em; text-transform:uppercase; padding:4px 10px; border-radius:4px; margin-bottom:20px; }
+    .audit-step { display:flex; align-items:flex-start; gap:14px; padding:14px 0; border-bottom:1px solid var(--border); }
+    .audit-step:last-of-type { border-bottom:none; }
+    .step-num { width:28px; height:28px; border-radius:8px; flex-shrink:0; display:flex; align-items:center; justify-content:center; font-size:0.72rem; font-weight:700; }
+    .step-num.c { background:var(--coral-light); color:var(--coral); }
+    .step-num.t { background:var(--teal-light); color:var(--teal); }
+    .step-num.a { background:var(--amber-light); color:var(--amber); }
+    .step-title { font-size:0.85rem; font-weight:600; color:var(--dark); margin-bottom:2px; }
+    .step-desc { font-size:0.75rem; color:var(--soft); line-height:1.5; }
+    .hero-card-footer { margin-top:20px; padding-top:20px; border-top:1px solid var(--border); display:flex; align-items:center; justify-content:space-between; }
+    .card-price { font-size:0.78rem; color:var(--soft); }
+    .card-price strong { font-size:1.1rem; color:var(--dark); font-weight:700; display:block; }
+    .card-badge { background:var(--teal-light); color:var(--teal); font-size:0.7rem; font-weight:600; padding:5px 12px; border-radius:100px; border:1px solid var(--teal-mid); }
+    .float-card { position:absolute; background:var(--white); border:1px solid var(--border); border-radius:12px; padding:12px 16px; box-shadow:0 8px 30px rgba(15,25,35,0.1); font-size:0.78rem; font-weight:500; color:var(--dark); display:flex; align-items:center; gap:8px; }
+    .float-card.top { top:-20px; right:-20px; animation:float 4s ease-in-out infinite; }
+    .float-card.bot { bottom:-16px; left:-20px; animation:float 4s ease-in-out infinite 2s; }
+    .fdot { width:8px; height:8px; border-radius:50%; }
+    .fdot.green { background:#10B981; }
+    .fdot.coral { background:var(--coral); }
 
-    /* Decorative corner line — top left */
-    body::after {
-      content: '';
-      position: fixed;
-      top: 0; left: 0;
-      width: 220px; height: 220px;
-      border-bottom: 1px solid var(--border);
-      border-right: 1px solid var(--border);
-      border-radius: 0 0 100% 0;
-      pointer-events: none;
-      z-index: 0;
-      opacity: 0.6;
-    }
+    /* SECTIONS */
+    section { padding:100px 60px; }
+    .stag { display:inline-flex; align-items:center; gap:8px; font-size:0.7rem; font-weight:600; letter-spacing:0.16em; text-transform:uppercase; color:var(--teal); margin-bottom:16px; }
+    .stag::before { content:''; width:24px; height:1.5px; background:var(--teal); }
+    .stitle { font-family:'Playfair Display',serif; font-size:clamp(2rem,3.5vw,3rem); line-height:1.15; letter-spacing:-0.03em; color:var(--dark); margin-bottom:20px; }
+    .stitle em { font-style:italic; color:var(--coral); }
+    .sdesc { font-size:1rem; color:var(--mid); line-height:1.8; max-width:540px; }
 
-    .page {
-      position: relative;
-      z-index: 1;
-      min-height: 100vh;
-      display: grid;
-      grid-template-rows: auto 1fr auto;
-      padding: 48px 56px;
-      max-width: 1100px;
-      margin: 0 auto;
-    }
+    /* ABOUT */
+    #about { background:var(--white); }
+    .about-grid { display:grid; grid-template-columns:1fr 1fr; gap:80px; align-items:start; }
+    .kws { display:flex; flex-wrap:wrap; gap:8px; margin-top:32px; }
+    .kw { background:var(--bg); border:1px solid var(--border); padding:6px 14px; border-radius:100px; font-size:0.75rem; font-weight:500; color:var(--mid); transition:all 0.2s; cursor:default; }
+    .kw:hover { background:var(--coral-light); border-color:var(--coral-mid); color:var(--coral); }
+    .team-cards { display:flex; flex-direction:column; gap:20px; }
+    .team-card { background:var(--bg); border:1px solid var(--border); border-radius:16px; padding:28px; display:flex; gap:20px; align-items:flex-start; transition:box-shadow 0.2s,transform 0.2s; }
+    .team-card:hover { box-shadow:0 12px 40px rgba(15,25,35,0.08); transform:translateY(-2px); }
+    .avatar { width:52px; height:52px; border-radius:14px; flex-shrink:0; display:flex; align-items:center; justify-content:center; font-family:'Playfair Display',serif; font-size:1.3rem; font-weight:700; color:var(--white); }
+    .av-coral { background:linear-gradient(135deg,var(--coral),#FF9580); }
+    .av-teal  { background:linear-gradient(135deg,var(--teal),#5DDECB); }
+    .t-name { font-size:1rem; font-weight:600; color:var(--dark); margin-bottom:4px; }
+    .t-role { font-size:0.78rem; color:var(--coral); font-weight:500; margin-bottom:10px; }
+    .t-bio  { font-size:0.82rem; color:var(--mid); line-height:1.65; }
+    .t-tags { display:flex; flex-wrap:wrap; gap:6px; margin-top:12px; }
+    .t-tag  { background:var(--white); border:1px solid var(--border); padding:3px 10px; border-radius:100px; font-size:0.68rem; font-weight:500; color:var(--soft); }
 
-    /* ── Header ── */
-    header {
-      display: flex;
-      align-items: center;
-      gap: 14px;
-      opacity: 0;
-      animation: fadeUp 0.7s ease forwards;
-      animation-delay: 0.1s;
-    }
+    /* QUALIFICATIONS */
+    #qualifications { background:var(--dark); }
+    #qualifications .stag  { color:var(--teal); }
+    #qualifications .stitle{ color:var(--white); }
+    #qualifications .sdesc { color:rgba(255,255,255,0.5); }
+    .qual-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:24px; margin-top:56px; }
+    .qual-card { background:rgba(255,255,255,0.04); border:1px solid rgba(255,255,255,0.08); border-radius:16px; padding:32px; transition:background 0.2s,transform 0.2s; }
+    .qual-card:hover { background:rgba(255,255,255,0.07); transform:translateY(-3px); }
+    .qi { width:44px; height:44px; border-radius:12px; display:flex; align-items:center; justify-content:center; font-size:20px; margin-bottom:20px; }
+    .qi.c { background:rgba(255,107,74,0.15); }
+    .qi.t { background:rgba(43,191,164,0.15); }
+    .qi.a { background:rgba(245,158,11,0.15); }
+    .q-title { font-size:1rem; font-weight:600; color:var(--white); margin-bottom:10px; }
+    .q-desc  { font-size:0.82rem; color:rgba(255,255,255,0.5); line-height:1.7; }
+    .soc2-banner { margin-top:48px; padding:28px 36px; background:rgba(43,191,164,0.08); border:1px solid rgba(43,191,164,0.2); border-radius:14px; display:flex; align-items:flex-start; gap:20px; }
+    .soc2-icon { font-size:2rem; flex-shrink:0; margin-top:2px; }
+    .soc2-title { font-size:0.95rem; font-weight:600; color:var(--white); margin-bottom:6px; }
+    .soc2-desc  { font-size:0.82rem; color:rgba(255,255,255,0.5); line-height:1.65; }
 
-    .logo-mark {
-      width: 38px;
-      height: 38px;
-      flex-shrink: 0;
-    }
+    /* SERVICES */
+    #services { background:var(--bg); }
+    .svc-intro { display:grid; grid-template-columns:1fr 1fr; gap:60px; align-items:end; margin-bottom:64px; }
+    .svc-grid { display:grid; grid-template-columns:repeat(2,1fr); gap:24px; }
+    .svc-card { background:var(--white); border:1px solid var(--border); border-radius:20px; padding:36px; transition:box-shadow 0.25s,transform 0.25s; position:relative; overflow:hidden; }
+    .svc-card::before { content:''; position:absolute; top:0; left:0; right:0; height:3px; border-radius:20px 20px 0 0; }
+    .svc-card.coral::before { background:var(--coral); }
+    .svc-card.teal::before  { background:var(--teal); }
+    .svc-card.amber::before { background:var(--amber); }
+    .svc-card.dark::before  { background:var(--dark); }
+    .svc-card:hover { box-shadow:0 20px 60px rgba(15,25,35,0.1); transform:translateY(-4px); }
+    .svc-num { font-family:'Playfair Display',serif; font-size:3rem; font-weight:900; line-height:1; opacity:0.06; position:absolute; top:24px; right:28px; color:var(--dark); }
+    .svc-emoji { font-size:1.8rem; margin-bottom:20px; display:block; }
+    .svc-title { font-size:1.1rem; font-weight:700; color:var(--dark); margin-bottom:12px; }
+    .svc-desc  { font-size:0.85rem; color:var(--mid); line-height:1.75; margin-bottom:20px; }
+    .svc-list  { list-style:none; }
+    .svc-list li { font-size:0.78rem; color:var(--soft); padding:5px 0; display:flex; align-items:center; gap:8px; }
+    .svc-list li::before { content:'→'; color:var(--coral); font-size:0.7rem; }
+    .pricing-hl { margin-top:20px; padding:16px; background:var(--teal-light); border:1px solid var(--teal-mid); border-radius:10px; }
+    .pricing-hl p { font-size:0.78rem; color:var(--teal); font-weight:500; line-height:1.6; }
+    .promo { display:inline-block; background:var(--teal); color:var(--white); font-size:0.68rem; font-weight:700; letter-spacing:0.05em; padding:3px 10px; border-radius:100px; margin-top:8px; }
 
-    .logo-name {
-      font-family: 'DM Serif Display', serif;
-      font-size: 1.25rem;
-      color: var(--dark);
-      letter-spacing: -0.01em;
-    }
+    /* PROCESS */
+    #process { background:var(--white); }
+    .process-hd { text-align:center; max-width:600px; margin:0 auto 64px; }
+    .process-hd .stag { justify-content:center; }
+    .process-hd .stag::before { display:none; }
+    .process-steps { display:grid; grid-template-columns:repeat(4,1fr); position:relative; }
+    .process-steps::before { content:''; position:absolute; top:28px; left:12%; right:12%; height:1px; background:linear-gradient(90deg,var(--teal),var(--coral)); opacity:0.25; z-index:0; }
+    .p-step { text-align:center; padding:0 20px; position:relative; z-index:1; }
+    .p-circle { width:56px; height:56px; border-radius:50%; margin:0 auto 20px; display:flex; align-items:center; justify-content:center; font-size:1.2rem; border:2px solid var(--border); background:var(--white); box-shadow:0 4px 16px rgba(15,25,35,0.08); transition:transform 0.2s,box-shadow 0.2s; }
+    .p-step:hover .p-circle { transform:scale(1.1); box-shadow:0 8px 30px rgba(15,25,35,0.15); }
+    .p-title { font-size:0.9rem; font-weight:600; color:var(--dark); margin-bottom:8px; }
+    .p-desc  { font-size:0.78rem; color:var(--soft); line-height:1.6; }
+    .p-free  { display:inline-block; background:var(--coral-light); color:var(--coral); font-size:0.65rem; font-weight:700; letter-spacing:0.05em; padding:2px 8px; border-radius:100px; margin-bottom:8px; }
 
-    .logo-name span {
-      color: var(--coral);
-    }
+    /* CONTACT */
+    #contact { background:var(--dark); text-align:center; }
+    #contact .stag { color:var(--teal); justify-content:center; }
+    #contact .stag::before { display:none; }
+    #contact .stitle { color:var(--white); }
+    .c-desc { font-size:1rem; color:rgba(255,255,255,0.5); line-height:1.8; max-width:480px; margin:0 auto 48px; }
+    .c-cards { display:flex; gap:20px; justify-content:center; flex-wrap:wrap; }
+    .c-card { background:rgba(255,255,255,0.05); border:1px solid rgba(255,255,255,0.1); border-radius:16px; padding:28px 36px; text-decoration:none; transition:background 0.2s,transform 0.2s; display:flex; flex-direction:column; align-items:center; gap:10px; }
+    .c-card:hover { background:rgba(255,255,255,0.1); transform:translateY(-3px); }
+    .c-icon  { font-size:1.8rem; }
+    .c-label { font-size:0.78rem; color:rgba(255,255,255,0.4); }
+    .c-value { font-size:0.9rem; font-weight:600; color:var(--white); }
+    .c-note  { margin-top:40px; font-size:0.8rem; color:rgba(255,255,255,0.3); line-height:1.6; }
+    .c-note strong { color:var(--teal); font-weight:600; }
 
-    /* ── Main content ── */
-    main {
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      padding: 64px 0 32px;
-    }
+    /* FOOTER */
+    footer { background:var(--dark); border-top:1px solid rgba(255,255,255,0.06); padding:32px 60px; display:flex; align-items:center; justify-content:space-between; }
+    .f-logo { font-family:'Playfair Display',serif; font-size:1rem; color:rgba(255,255,255,0.4); }
+    .f-logo span { color:var(--coral); }
+    .f-copy  { font-size:0.75rem; color:rgba(255,255,255,0.25); }
+    .f-links { display:flex; gap:24px; }
+    .f-links a { font-size:0.75rem; color:rgba(255,255,255,0.3); text-decoration:none; transition:color 0.2s; }
+    .f-links a:hover { color:var(--teal); }
 
-    .eyebrow {
-      display: inline-flex;
-      align-items: center;
-      gap: 8px;
-      font-size: 0.72rem;
-      font-weight: 500;
-      letter-spacing: 0.18em;
-      text-transform: uppercase;
-      color: var(--teal);
-      margin-bottom: 28px;
-      opacity: 0;
-      animation: fadeUp 0.7s ease forwards;
-      animation-delay: 0.25s;
-    }
+    /* ANIMATIONS */
+    @keyframes fadeUp { from{opacity:0;transform:translateY(20px)} to{opacity:1;transform:translateY(0)} }
+    @keyframes fadeIn { from{opacity:0} to{opacity:1} }
+    @keyframes float  { 0%,100%{transform:translateY(0)} 50%{transform:translateY(-8px)} }
+    @keyframes pulse  { 0%,100%{opacity:1} 50%{opacity:0.4} }
+    .reveal { opacity:0; transform:translateY(24px); transition:opacity 0.7s ease,transform 0.7s ease; }
+    .reveal.visible { opacity:1; transform:translateY(0); }
 
-    .eyebrow::before {
-      content: '';
-      display: block;
-      width: 28px;
-      height: 1.5px;
-      background: var(--teal);
-      border-radius: 2px;
-    }
-
-    h1 {
-      font-family: 'DM Serif Display', serif;
-      font-size: clamp(2.8rem, 6vw, 5rem);
-      line-height: 1.08;
-      letter-spacing: -0.03em;
-      color: var(--dark);
-      max-width: 680px;
-      margin-bottom: 32px;
-      opacity: 0;
-      animation: fadeUp 0.7s ease forwards;
-      animation-delay: 0.4s;
-    }
-
-    h1 em {
-      font-style: italic;
-      color: var(--coral);
-    }
-
-    .descriptor {
-      font-size: 1.05rem;
-      line-height: 1.75;
-      color: var(--mid);
-      max-width: 480px;
-      font-weight: 300;
-      margin-bottom: 52px;
-      opacity: 0;
-      animation: fadeUp 0.7s ease forwards;
-      animation-delay: 0.55s;
-    }
-
-    /* ── Pillars ── */
-    .pillars {
-      display: flex;
-      gap: 0;
-      border: 1px solid var(--border);
-      border-radius: 12px;
-      overflow: hidden;
-      max-width: 580px;
-      opacity: 0;
-      animation: fadeUp 0.7s ease forwards;
-      animation-delay: 0.7s;
-    }
-
-    .pillar {
-      flex: 1;
-      padding: 20px 24px;
-      border-right: 1px solid var(--border);
-      transition: background 0.2s ease;
-    }
-
-    .pillar:last-child { border-right: none; }
-    .pillar:hover { background: var(--soft); }
-
-    .pillar-icon {
-      width: 28px;
-      height: 28px;
-      border-radius: 8px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      margin-bottom: 10px;
-      font-size: 14px;
-    }
-
-    .pillar-icon.coral { background: #FFF0EC; }
-    .pillar-icon.teal  { background: #F0FAF8; }
-    .pillar-icon.amber { background: #FFFBF0; }
-
-    .pillar-label {
-      font-size: 0.78rem;
-      font-weight: 500;
-      color: var(--dark);
-      letter-spacing: 0.01em;
-      margin-bottom: 3px;
-    }
-
-    .pillar-sub {
-      font-size: 0.72rem;
-      color: var(--mid);
-      line-height: 1.4;
-    }
-
-    /* ── Decorative node graph ── */
-    .graph-wrap {
-      position: fixed;
-      right: -20px;
-      top: 50%;
-      transform: translateY(-50%);
-      opacity: 0;
-      animation: fadeIn 1.2s ease forwards;
-      animation-delay: 1s;
-      pointer-events: none;
-    }
-
-    /* ── Footer ── */
-    footer {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      padding-top: 32px;
-      border-top: 1px solid var(--border);
-      opacity: 0;
-      animation: fadeUp 0.7s ease forwards;
-      animation-delay: 0.85s;
-    }
-
-    .footer-left {
-      font-size: 0.78rem;
-      color: var(--mid);
-    }
-
-    .footer-left strong {
-      color: var(--dark);
-      font-weight: 500;
-    }
-
-    .footer-right {
-      display: flex;
-      align-items: center;
-      gap: 6px;
-      font-size: 0.78rem;
-      color: var(--mid);
-    }
-
-    .status-dot {
-      width: 7px;
-      height: 7px;
-      border-radius: 50%;
-      background: var(--teal);
-      animation: pulse 2s ease-in-out infinite;
-    }
-
-    /* ── Animations ── */
-    @keyframes fadeUp {
-      from { opacity: 0; transform: translateY(18px); }
-      to   { opacity: 1; transform: translateY(0); }
-    }
-
-    @keyframes fadeIn {
-      from { opacity: 0; }
-      to   { opacity: 1; }
-    }
-
-    @keyframes pulse {
-      0%, 100% { opacity: 1; transform: scale(1); }
-      50%       { opacity: 0.5; transform: scale(0.85); }
-    }
-
-    /* ── Responsive ── */
-    @media (max-width: 640px) {
-      .page { padding: 32px 28px; }
-      .graph-wrap { display: none; }
-      .pillars { flex-direction: column; }
-      .pillar { border-right: none; border-bottom: 1px solid var(--border); }
-      .pillar:last-child { border-bottom: none; }
+    @media(max-width:900px){
+      nav{padding:16px 28px;}
+      .nav-links{display:none;}
+      .hero{grid-template-columns:1fr;padding:100px 28px 60px;}
+      .hero-right{display:none;}
+      section{padding:72px 28px;}
+      .about-grid,.svc-intro{grid-template-columns:1fr;gap:40px;}
+      .qual-grid,.svc-grid{grid-template-columns:1fr;}
+      .process-steps{grid-template-columns:1fr 1fr;gap:40px;}
+      .process-steps::before{display:none;}
+      footer{flex-direction:column;gap:16px;text-align:center;padding:28px;}
     }
   </style>
 </head>
 <body>
-  <div class="page">
 
-    <!-- Header -->
-    <header>
-      <svg class="logo-mark" viewBox="0 0 38 38" fill="none" xmlns="http://www.w3.org/2000/svg">
-        <circle cx="19" cy="19" r="19" fill="#F0FAF8"/>
-        <!-- Team nodes -->
-        <circle cx="18" cy="13" r="3.5" fill="#2BBFA4"/>
-        <circle cx="25" cy="15" r="3.5" fill="#2BBFA4"/>
-        <circle cx="16" cy="20" r="3.5" fill="#2BBFA4"/>
-        <circle cx="24" cy="22" r="3.5" fill="#2BBFA4"/>
-        <circle cx="20" cy="27" r="3.5" fill="#2BBFA4"/>
-        <!-- Internal lines -->
-        <line x1="18" y1="13" x2="25" y2="15" stroke="#2BBFA4" stroke-width="1" opacity="0.5"/>
-        <line x1="18" y1="13" x2="16" y2="20" stroke="#2BBFA4" stroke-width="1" opacity="0.5"/>
-        <line x1="25" y1="15" x2="24" y2="22" stroke="#2BBFA4" stroke-width="1" opacity="0.5"/>
-        <line x1="16" y1="20" x2="20" y2="27" stroke="#2BBFA4" stroke-width="1" opacity="0.5"/>
-        <line x1="24" y1="22" x2="20" y2="27" stroke="#2BBFA4" stroke-width="1" opacity="0.5"/>
-        <!-- Support node -->
-        <circle cx="8" cy="28" r="4.5" fill="#1F2937"/>
-        <circle cx="8" cy="28" r="3" fill="#FF6B4A"/>
-        <circle cx="8" cy="28" r="1.2" fill="white"/>
-        <!-- Dashed lines from support node -->
-        <line x1="8" y1="28" x2="16" y2="20" stroke="#FF6B4A" stroke-width="1" stroke-dasharray="2,1.5" opacity="0.7"/>
-        <line x1="8" y1="28" x2="20" y2="27" stroke="#FF6B4A" stroke-width="1" stroke-dasharray="2,1.5" opacity="0.5"/>
-      </svg>
-      <div class="logo-name">Satnivik <span>Tech</span></div>
-    </header>
+<nav id="navbar">
+  <a href="#" class="nav-logo">
+    <svg width="32" height="32" viewBox="0 0 38 38" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <circle cx="19" cy="19" r="19" fill="#F0FAF8"/>
+      <circle cx="18" cy="13" r="3.5" fill="#2BBFA4"/><circle cx="25" cy="15" r="3.5" fill="#2BBFA4"/>
+      <circle cx="16" cy="20" r="3.5" fill="#2BBFA4"/><circle cx="24" cy="22" r="3.5" fill="#2BBFA4"/>
+      <circle cx="20" cy="27" r="3.5" fill="#2BBFA4"/>
+      <line x1="18" y1="13" x2="25" y2="15" stroke="#2BBFA4" stroke-width="1" opacity="0.5"/>
+      <line x1="18" y1="13" x2="16" y2="20" stroke="#2BBFA4" stroke-width="1" opacity="0.5"/>
+      <line x1="25" y1="15" x2="24" y2="22" stroke="#2BBFA4" stroke-width="1" opacity="0.5"/>
+      <line x1="16" y1="20" x2="20" y2="27" stroke="#2BBFA4" stroke-width="1" opacity="0.5"/>
+      <line x1="24" y1="22" x2="20" y2="27" stroke="#2BBFA4" stroke-width="1" opacity="0.5"/>
+      <circle cx="8" cy="28" r="4.5" fill="#1F2937"/>
+      <circle cx="8" cy="28" r="3" fill="#FF6B4A"/>
+      <circle cx="8" cy="28" r="1.2" fill="white"/>
+      <line x1="8" y1="28" x2="16" y2="20" stroke="#FF6B4A" stroke-width="1" stroke-dasharray="2,1.5" opacity="0.7"/>
+      <line x1="8" y1="28" x2="20" y2="27" stroke="#FF6B4A" stroke-width="1" stroke-dasharray="2,1.5" opacity="0.5"/>
+    </svg>
+    <span class="nav-logo-text">Satnivik <span>Tech</span></span>
+  </a>
+  <ul class="nav-links">
+    <li><a href="#about">About</a></li>
+    <li><a href="#qualifications">Credentials</a></li>
+    <li><a href="#services">Services</a></li>
+    <li><a href="#process">How It Works</a></li>
+    <li><a href="#contact" class="nav-cta">Get in Touch</a></li>
+  </ul>
+</nav>
 
-    <!-- Main -->
-    <main>
-      <div class="eyebrow">Coming Soon</div>
-
-      <h1>Support infrastructure,<br><em>done right.</em></h1>
-
-      <p class="descriptor">
-        We help early-stage SaaS startups build the support systems they need to grow —
-        before chaos becomes the default. Audits, tooling, processes, and frameworks built for your stage.
-      </p>
-
-      <div class="pillars">
-        <div class="pillar">
-          <div class="pillar-icon coral">🔍</div>
-          <div class="pillar-label">Audit</div>
-          <div class="pillar-sub">Find what's broken before it costs you</div>
-        </div>
-        <div class="pillar">
-          <div class="pillar-icon teal">⚙️</div>
-          <div class="pillar-label">Build</div>
-          <div class="pillar-sub">Tooling & processes that actually scale</div>
-        </div>
-        <div class="pillar">
-          <div class="pillar-icon amber">📈</div>
-          <div class="pillar-label">Optimise</div>
-          <div class="pillar-sub">Ongoing advisory as you grow</div>
-        </div>
-      </div>
-    </main>
-
-    <!-- Decorative graph -->
-    <div class="graph-wrap">
-      <svg width="320" height="420" viewBox="0 0 320 420" fill="none" xmlns="http://www.w3.org/2000/svg" opacity="0.07">
-        <circle cx="160" cy="210" r="160" stroke="#1F2937" stroke-width="1"/>
-        <circle cx="160" cy="210" r="110" stroke="#1F2937" stroke-width="1"/>
-        <circle cx="160" cy="210" r="60" stroke="#1F2937" stroke-width="1"/>
-        <circle cx="160" cy="100" r="8" fill="#FF6B4A"/>
-        <circle cx="245" cy="160" r="8" fill="#2BBFA4"/>
-        <circle cx="245" cy="260" r="8" fill="#FF6B4A"/>
-        <circle cx="160" cy="320" r="8" fill="#2BBFA4"/>
-        <circle cx="75"  cy="260" r="8" fill="#FF6B4A"/>
-        <circle cx="75"  cy="160" r="8" fill="#2BBFA4"/>
-        <line x1="160" y1="100" x2="245" y2="160" stroke="#1F2937" stroke-width="1"/>
-        <line x1="245" y1="160" x2="245" y2="260" stroke="#1F2937" stroke-width="1"/>
-        <line x1="245" y1="260" x2="160" y2="320" stroke="#1F2937" stroke-width="1"/>
-        <line x1="160" y1="320" x2="75"  y2="260" stroke="#1F2937" stroke-width="1"/>
-        <line x1="75"  y1="260" x2="75"  y2="160" stroke="#1F2937" stroke-width="1"/>
-        <line x1="75"  y1="160" x2="160" y2="100" stroke="#1F2937" stroke-width="1"/>
-        <circle cx="160" cy="210" r="12" fill="#1F2937"/>
-        <line x1="160" y1="210" x2="160" y2="100" stroke="#1F2937" stroke-width="1" stroke-dasharray="4,3"/>
-        <line x1="160" y1="210" x2="245" y2="160" stroke="#1F2937" stroke-width="1" stroke-dasharray="4,3"/>
-        <line x1="160" y1="210" x2="245" y2="260" stroke="#1F2937" stroke-width="1" stroke-dasharray="4,3"/>
-        <line x1="160" y1="210" x2="160" y2="320" stroke="#1F2937" stroke-width="1" stroke-dasharray="4,3"/>
-        <line x1="160" y1="210" x2="75"  y2="260" stroke="#1F2937" stroke-width="1" stroke-dasharray="4,3"/>
-        <line x1="160" y1="210" x2="75"  y2="160" stroke="#1F2937" stroke-width="1" stroke-dasharray="4,3"/>
-      </svg>
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-left">
+    <div class="hero-badge">Boutique SaaS Support Consulting</div>
+    <h1>Your support chaos<br/>has a <em>fix.</em><br/>We build <span class="lt">the system.</span></h1>
+    <p class="hero-desc">Early-stage SaaS startups deserve support infrastructure that scales with them — not duct-taped inboxes and founder-handled tickets. We design, build, and optimise the support stack so you can focus on growing your product.</p>
+    <div class="hero-actions">
+      <a href="https://calendar.app.google/US4Yqtx5hT6wpQpX6" target="_blank" class="btn-primary">Book a Free Audit Call</a>
+      <a href="#services" class="btn-sec">See what we offer</a>
     </div>
-
-    <!-- Footer -->
-    <footer>
-      <div class="footer-left">
-        <strong>Satnivik Tech</strong> &nbsp;·&nbsp; Support Infrastructure Consulting
-      </div>
-      <div class="footer-right">
-        <div class="status-dot"></div>
-        Something great is being built
-      </div>
-    </footer>
-
+    <div class="hero-stats">
+      <div><div class="stat-num">5<span>★</span></div><div class="stat-label">First 5 clients get<br/>free onboarding</div></div>
+      <div><div class="stat-num">3<span>+</span></div><div class="stat-label">Platforms we<br/>specialise in</div></div>
+      <div><div class="stat-num">$0</div><div class="stat-label">Cost for your<br/>first audit call</div></div>
+    </div>
   </div>
+  <div class="hero-right">
+    <div style="position:relative;width:100%;max-width:420px;">
+      <div class="float-card top"><span class="fdot green"></span> Audit complete — 5 gaps found</div>
+      <div class="hero-card">
+        <div class="hero-card-tag">Sample Audit Scope</div>
+        <div class="audit-step"><div class="step-num c">01</div><div><div class="step-title">Ticket Flow Review</div><div class="step-desc">Audit current inbox, tools, volume & response times</div></div></div>
+        <div class="audit-step"><div class="step-num t">02</div><div><div class="step-title">Gap Analysis</div><div class="step-desc">Identify the top 5 broken or missing pieces</div></div></div>
+        <div class="audit-step"><div class="step-num a">03</div><div><div class="step-title">Quick Wins Doc</div><div class="step-desc">3 things you can fix yourself, immediately</div></div></div>
+        <div class="audit-step"><div class="step-num c">04</div><div><div class="step-title">30/60/90 Roadmap</div><div class="step-desc">Prioritised improvement plan delivered as a PDF</div></div></div>
+        <div class="hero-card-footer">
+          <div class="card-price"><strong>Flat Fee</strong>Fixed scope · Fast delivery</div>
+          <div class="card-badge">5-day turnaround</div>
+        </div>
+      </div>
+      <div class="float-card bot"><span class="fdot coral"></span> Roadmap delivered in 5 days</div>
+    </div>
+  </div>
+</section>
+
+<!-- ABOUT -->
+<section id="about">
+  <div class="about-grid">
+    <div>
+      <div class="stag reveal">Who We Are</div>
+      <h2 class="stitle reveal">A boutique firm built<br/>for <em>startup reality.</em></h2>
+      <p class="sdesc reveal" style="margin-bottom:16px;">Satnivik Tech is a passionate, specialist consulting practice focused on one thing: solving the support infrastructure problem for early-stage SaaS startups. We're not a large agency juggling a hundred clients. We are a small, dedicated team that embeds deeply in your context and builds support systems that actually work.</p>
+      <p class="sdesc reveal">We've lived inside support operations at scale. We know what breaks, when it breaks, and how to prevent it. Whether you're at 10 customers or 1,000, we build the foundation that lets your support grow without collapsing.</p>
+      <div class="kws reveal">
+        <span class="kw">Support Infrastructure</span><span class="kw">SaaS Consulting</span>
+        <span class="kw">Ticket Triage</span><span class="kw">Escalation Frameworks</span>
+        <span class="kw">Zendesk Setup</span><span class="kw">Freshdesk Configuration</span>
+        <span class="kw">Intercom Workflows</span><span class="kw">SOP Design</span>
+        <span class="kw">CSAT Optimisation</span><span class="kw">Support Audit</span>
+        <span class="kw">Knowledge Base</span><span class="kw">Fractional Support Lead</span>
+      </div>
+    </div>
+    <div class="reveal">
+      <div class="team-cards">
+        <div class="team-card">
+          <div class="avatar av-coral">N</div>
+          <div>
+            <div class="t-name">Niveda T S</div>
+            <div class="t-role">Founder & Lead Consultant</div>
+            <div class="t-bio">Started as a Mobile Application Developer before transitioning into support engineering. Brings a rare combination of technical depth and customer empathy — having worked across Amazon, Trilogy, and Databox. Understands support not just as a function, but as a product that needs to be designed and maintained.</div>
+            <div class="t-tags">
+              <span class="t-tag">Amazon</span><span class="t-tag">Trilogy</span>
+              <span class="t-tag">Databox</span><span class="t-tag">Mobile Dev</span>
+              <span class="t-tag">Support Engineering</span>
+            </div>
+          </div>
+        </div>
+        <div class="team-card">
+          <div class="avatar av-teal">G</div>
+          <div>
+            <div class="t-name">Ghiridhar S</div>
+            <div class="t-role">Support Operations Analyst</div>
+            <div class="t-bio">An emerging support professional with foundational Zendesk knowledge and SOC2 compliance awareness. Currently completing a professional support communication certification. Brings fresh rigour to client research, prospect outreach, and operations groundwork.</div>
+            <div class="t-tags">
+              <span class="t-tag">Zendesk</span><span class="t-tag">SOC2 Aware</span>
+              <span class="t-tag">Support Comms</span><span class="t-tag">Client Research</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- QUALIFICATIONS -->
+<section id="qualifications">
+  <div class="stag reveal">Our Credentials</div>
+  <h2 class="stitle reveal">We know these tools.<br/><em>Deeply.</em></h2>
+  <p class="sdesc reveal">Platform expertise, industry experience, and security awareness — the combination that makes our recommendations credible and our implementations reliable.</p>
+  <div class="qual-grid">
+    <div class="qual-card reveal">
+      <div class="qi c">🏗️</div>
+      <div class="q-title">Industry Experience</div>
+      <div class="q-desc">Hands-on support engineering experience at global companies including Amazon, Trilogy, and Databox — spanning enterprise SaaS, e-commerce, and developer tools. We've seen what works at scale and what collapses under pressure.</div>
+    </div>
+    <div class="qual-card reveal">
+      <div class="qi t">🛠️</div>
+      <div class="q-title">Platform Certifications</div>
+      <div class="q-desc">Trained and certified across Zendesk, Freshdesk, and Intercom. We configure, optimise, and train your team on whichever platform fits your workflow and budget — from free open-source tools to enterprise helpdesks.</div>
+    </div>
+    <div class="qual-card reveal">
+      <div class="qi a">📚</div>
+      <div class="q-title">Ongoing Certifications</div>
+      <div class="q-desc">Our team holds and is actively pursuing certifications in Zendesk Administration, Freshdesk Implementation, Intercom Support Management, and professional support communication — keeping our practice current and credentialled.</div>
+    </div>
+  </div>
+  <div class="soc2-banner reveal">
+    <div class="soc2-icon">🔒</div>
+    <div>
+      <div class="soc2-title">SOC2-Aware Practice — Your Customer Data Is Safe With Us</div>
+      <div class="soc2-desc">We understand the SOC2 compliance framework and apply its principles to every engagement. When we configure your support tooling, we consider how customer data flows, where it's stored, and how access is controlled. For SaaS companies in fintech, healthtech, or any regulated space — this isn't an afterthought. It's built into how we work from day one.</div>
+    </div>
+  </div>
+</section>
+
+<!-- SERVICES -->
+<section id="services">
+  <div class="svc-intro">
+    <div>
+      <div class="stag reveal">What We Offer</div>
+      <h2 class="stitle reveal">Four ways we<br/>can <em>help you.</em></h2>
+    </div>
+    <p class="sdesc reveal">From a one-time audit to ongoing fractional advisory — we meet you where you are. Every engagement starts with understanding your context, not selling you a package.</p>
+  </div>
+  <div class="svc-grid">
+    <div class="svc-card coral reveal">
+      <span class="svc-num">01</span>
+      <span class="svc-emoji">🔍</span>
+      <div class="svc-title">Support Infrastructure Audit</div>
+      <div class="svc-desc">A deep, structured review of your entire support setup — tools, workflows, ticket handling, response times, escalation paths, and team coverage. Delivered as a clean PDF report with a readout call.</div>
+      <ul class="svc-list">
+        <li>Ticket flow & volume analysis</li>
+        <li>Top 5 gap identification</li>
+        <li>Immediate quick wins document</li>
+        <li>30/60/90 day improvement roadmap</li>
+        <li>1-hour readout call with Q&A</li>
+      </ul>
+    </div>
+    <div class="svc-card teal reveal">
+      <span class="svc-num">02</span>
+      <span class="svc-emoji">⚙️</span>
+      <div class="svc-title">Implementation & Tooling Setup</div>
+      <div class="svc-desc">We don't just recommend tools — we set them up. From Zendesk and Freshdesk to Intercom and open-source alternatives, we configure your helpdesk to match your actual workflow, not a default template.</div>
+      <ul class="svc-list">
+        <li>Platform selection & setup</li>
+        <li>Ticket routing & automation rules</li>
+        <li>Canned responses & macros</li>
+        <li>Integration with existing tools</li>
+        <li>Agent onboarding & training</li>
+      </ul>
+    </div>
+    <div class="svc-card amber reveal">
+      <span class="svc-num">03</span>
+      <span class="svc-emoji">📋</span>
+      <div class="svc-title">Process Design & SOPs</div>
+      <div class="svc-desc">Support without documentation is organised chaos. We create the runbooks, escalation frameworks, response templates, and SOPs your team needs to stay consistent at any volume.</div>
+      <ul class="svc-list">
+        <li>Escalation path design</li>
+        <li>Response SOP library</li>
+        <li>Runbooks for common issues</li>
+        <li>Knowledge base structure</li>
+        <li>Handoff & shift coverage docs</li>
+      </ul>
+    </div>
+    <div class="svc-card dark reveal">
+      <span class="svc-num">04</span>
+      <span class="svc-emoji">🤝</span>
+      <div class="svc-title">Fractional Support Advisory</div>
+      <div class="svc-desc">Not ready for a full-time support lead? We act as your fractional Head of Support — setting strategy, overseeing your team, and optimising operations as you scale. Priced to match your actual usage.</div>
+      <ul class="svc-list">
+        <li>One free discovery audit call</li>
+        <li>One-time onboarding fee</li>
+        <li>Per-ticket / per-chat billing based on load</li>
+        <li>Monthly performance reviews</li>
+        <li>Scales up or down with your volume</li>
+      </ul>
+      <div class="pricing-hl">
+        <p>🎉 <strong>First 5 clients get free onboarding.</strong> You only pay for your infrastructure — which we'll keep as lean as possible.</p>
+        <span class="promo">Limited spots available</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PROCESS -->
+<section id="process">
+  <div class="process-hd">
+    <div class="stag reveal">How It Works</div>
+    <h2 class="stitle reveal">From first call to<br/><em>running system.</em></h2>
+    <p class="sdesc reveal" style="margin:0 auto;">A simple, transparent process. No surprises, no scope creep.</p>
+  </div>
+  <div class="process-steps">
+    <div class="p-step reveal">
+      <span class="p-free">Free</span>
+      <div class="p-circle">📞</div>
+      <div class="p-title">Discovery Call</div>
+      <div class="p-desc">30 minutes on Google Meet. We understand your setup, team size, and biggest pain points. No pitch — just questions.</div>
+    </div>
+    <div class="p-step reveal">
+      <div class="p-circle">🔍</div>
+      <div class="p-title">Audit & Analysis</div>
+      <div class="p-desc">We go deep into your support stack. Tools, workflows, ticket data, team coverage — everything gets reviewed.</div>
+    </div>
+    <div class="p-step reveal">
+      <div class="p-circle">📄</div>
+      <div class="p-title">Recommendations</div>
+      <div class="p-desc">A clean PDF report with gaps, quick wins, and a prioritised roadmap. Delivered in 5 days with a readout call included.</div>
+    </div>
+    <div class="p-step reveal">
+      <div class="p-circle">🚀</div>
+      <div class="p-title">Implement & Scale</div>
+      <div class="p-desc">We execute the roadmap with you — or hand it off clearly if you'd rather run it yourself. Either way, you leave with a system.</div>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section id="contact">
+  <div class="stag">Let's Talk</div>
+  <h2 class="stitle" style="color:var(--white);">Ready to fix your<br/><em>support operations?</em></h2>
+  <p class="c-desc">Start with a free 30-minute discovery call — no commitment, no pitch. Just an honest conversation about where your support is today and what it could look like.</p>
+  <div class="c-cards">
+    <a href="mailto:consult@satniviktech.com" class="c-card">
+      <div class="c-icon">✉️</div>
+      <div class="c-label">Send us an email</div>
+      <div class="c-value">consult@satniviktech.com</div>
+    </a>
+    <a href="https://calendar.app.google/US4Yqtx5hT6wpQpX6" target="_blank" class="c-card">
+      <div class="c-icon">📅</div>
+      <div class="c-label">Book a call directly</div>
+      <div class="c-value">Google Meet — 30 min</div>
+    </a>
+  </div>
+  <p class="c-note">We respond to all enquiries within <strong>1 business day.</strong><br/>First 5 clients receive <strong>free onboarding</strong> — spots are limited.</p>
+</section>
+
+<footer>
+  <div class="f-logo">Satnivik <span>Tech</span></div>
+  <div class="f-copy">© 2026 Satnivik Tech. Support Infrastructure Consulting.</div>
+  <div class="f-links">
+    <a href="#about">About</a>
+    <a href="#services">Services</a>
+    <a href="#contact">Contact</a>
+  </div>
+</footer>
+
+<script>
+  const nav = document.getElementById('navbar');
+  window.addEventListener('scroll', () => nav.classList.toggle('scrolled', window.scrollY > 40));
+  const obs = new IntersectionObserver((entries) => {
+    entries.forEach((e, i) => {
+      if (e.isIntersecting) {
+        setTimeout(() => e.target.classList.add('visible'), i * 90);
+        obs.unobserve(e.target);
+      }
+    });
+  }, { threshold: 0.1 });
+  document.querySelectorAll('.reveal').forEach(el => obs.observe(el));
+</script>
 </body>
 </html>
