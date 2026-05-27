@@ -30,8 +30,8 @@
     .nav-links { display:flex; align-items:center; gap:32px; list-style:none; }
     .nav-links a { font-size:0.85rem; font-weight:500; color:var(--mid); text-decoration:none; transition:color 0.2s; }
     .nav-links a:hover { color:var(--coral); }
-    .nav-cta { background:var(--dark); color:var(--white); padding:10px 22px; border-radius:6px; font-size:0.82rem; font-weight:500; text-decoration:none; transition:background 0.2s,transform 0.2s; }
-    .nav-cta:hover { background:var(--coral); transform:translateY(-1px); }
+    .nav-cta { background:var(--coral); color:var(--white) !important; padding:10px 22px; border-radius:6px; font-size:0.82rem; font-weight:500; text-decoration:none; transition:background 0.2s,transform 0.2s,box-shadow 0.2s; box-shadow:0 2px 12px rgba(255,107,74,0.3); }
+    .nav-cta:hover { background:var(--dark) !important; color:var(--white) !important; transform:translateY(-1px); box-shadow:0 4px 20px rgba(15,25,35,0.25); }
 
     /* HERO */
     .hero { min-height:100vh; display:grid; grid-template-columns:1fr 1fr; align-items:center; padding:120px 60px 80px; gap:60px; position:relative; overflow:hidden; }
@@ -306,10 +306,10 @@
           <div>
             <div class="t-name">Ghiridhar S</div>
             <div class="t-role">Support Operations Analyst</div>
-            <div class="t-bio">An emerging support professional with foundational Zendesk knowledge and SOC2 compliance awareness. Currently completing a professional support communication certification. Brings fresh rigour to client research, prospect outreach, and operations groundwork.</div>
+            <div class="t-bio">An emerging support professional with foundational Zendesk knowledge and SOC2 compliance awareness. Currently completing the <a href="https://alison.com/course/customer-service-skills" target="_blank" style="color:var(--teal);font-weight:500;text-decoration:none;">Alison Customer Service Skills Certification</a> — a free, CPD-accredited course covering professional communication, complaint handling, and customer interaction techniques for L1 support roles. Brings fresh rigour to client research, prospect outreach, and operations groundwork.</div>
             <div class="t-tags">
               <span class="t-tag">Zendesk</span><span class="t-tag">SOC2 Aware</span>
-              <span class="t-tag">Support Comms</span><span class="t-tag">Client Research</span>
+              <span class="t-tag">Alison Certified</span><span class="t-tag">Client Research</span>
             </div>
           </div>
         </div>
@@ -336,15 +336,15 @@
     </div>
     <div class="qual-card reveal">
       <div class="qi a">📚</div>
-      <div class="q-title">Ongoing Certifications</div>
-      <div class="q-desc">Our team holds and is actively pursuing certifications in Zendesk Administration, Freshdesk Implementation, Intercom Support Management, and professional support communication — keeping our practice current and credentialled.</div>
+      <div class="q-title">Active Certifications</div>
+      <div class="q-desc">Our team holds and is actively completing: <a href="https://alison.com/course/customer-service-skills" target="_blank" style="color:var(--teal);text-decoration:none;font-weight:500;">Alison Customer Service Skills Certification (CPD Accredited)</a>, Zendesk Administration, Freshdesk Implementation, Intercom Support Management, and the <a href="https://scytale.ai/free-soc2-training/" target="_blank" style="color:var(--teal);text-decoration:none;font-weight:500;">Scytale SOC2 Master Implementer Certification</a> — keeping our practice current, credentialled, and security-aware.</div>
     </div>
   </div>
   <div class="soc2-banner reveal">
     <div class="soc2-icon">🔒</div>
     <div>
       <div class="soc2-title">SOC2-Aware Practice — Your Customer Data Is Safe With Us</div>
-      <div class="soc2-desc">We understand the SOC2 compliance framework and apply its principles to every engagement. When we configure your support tooling, we consider how customer data flows, where it's stored, and how access is controlled. For SaaS companies in fintech, healthtech, or any regulated space — this isn't an afterthought. It's built into how we work from day one.</div>
+      <div class="soc2-desc">Both members of our team are completing the <a href="https://scytale.ai/free-soc2-training/" target="_blank" style="color:var(--teal);font-weight:500;text-decoration:none;">Scytale SOC2 Master Implementer Certification</a> — a comprehensive free crash course covering the full SOC2 compliance framework, trust service criteria, and audit preparation. We understand how customer data flows through support tooling, where it's stored, and how access should be controlled. For SaaS companies in fintech, healthtech, or any regulated space — this isn't an afterthought. It's built into how we work from day one.</div>
     </div>
   </div>
 </section>
