@@ -1,0 +1,18 @@
+# Satnivik Tech
+
+> Satnivik Tech is a boutique support infrastructure consulting firm for early-stage SaaS startups. We run fixed-scope support audits, set up helpdesks (Zendesk, Freshdesk, Intercom), design SOPs and escalation paths, and provide fractional support leadership.
+
+## Services
+
+- [Customer Support Audit](https://www.satniviktech.com/support-audit/): A fixed-scope review of your support setup. Delivered in 5 days as a PDF with a gap analysis, quick wins and a 30/60/90-day roadmap.
+- [Homepage](https://www.satniviktech.com/): Overview of services, the team, and how an engagement works.
+
+## Company
+
+##- [Privacy Policy](https://www.satniviktech.com/privacy/): How we handle personal and client data.
+##- [Terms of Use](https://www.satniviktech.com/terms/): Terms for using the site and booking calls.
+
+## Contact
+
+- Email: consult@satniviktech.com
+- Book a free 30-minute call: https://calendar.app.google/US4Yqtx5hT6wpQpX6
