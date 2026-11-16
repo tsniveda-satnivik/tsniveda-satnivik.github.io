@@ -231,9 +231,13 @@
     .reveal.visible { opacity:1; transform:translateY(0); }
 
     #qualifications .stitle em, #contact .stitle em { color:#D4A72C; }
+    .nav-toggle{display:none;background:none;border:0;font-size:28px;color:inherit;cursor:pointer;}
     @media(max-width:900px){
       nav{padding:16px 28px;}
-      .nav-links{display:none;}
+      .nav-toggle{display:block;}
+      .nav-links{display:none;position:absolute;top:100%;left:0;right:0;flex-direction:column;padding:12px 28px 20px;background:#0f172a;}
+      .nav-links.open{display:flex;}
+      .nav-links a{padding:12px 0;}
       .hero{grid-template-columns:1fr;padding:100px 28px 60px;}
       .hero-right{display:none;}
       section{padding:72px 28px;}
@@ -609,6 +613,18 @@
     });
   }, { threshold: 0.1 });
   document.querySelectorAll('.reveal').forEach(el => obs.observe(el));
+</script>
+<script>
+const t = document.querySelector('.nav-toggle');
+const l = document.getElementById('nav-links');
+t.addEventListener('click', () => {
+  const open = l.classList.toggle('open');
+  t.setAttribute('aria-expanded', open);
+});
+l.querySelectorAll('a').forEach(a => a.addEventListener('click', () => {
+  l.classList.remove('open');
+  t.setAttribute('aria-expanded', false);
+}));
 </script>
 </body>
 </html>
