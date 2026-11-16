@@ -229,6 +229,9 @@
     @keyframes pulse  { 0%,100%{opacity:1} 50%{opacity:0.4} }
     .reveal { opacity:0; transform:translateY(24px); transition:opacity 0.7s ease,transform 0.7s ease; }
     .reveal.visible { opacity:1; transform:translateY(0); }
+    @media (prefers-reduced-motion:reduce){
+    .reveal{opacity:1;transform:none;transition:none;}
+     }
 
     #qualifications .stitle em, #contact .stitle em { color:#D4A72C; }
     .nav-toggle{display:none;background:none;border:0;font-size:28px;color:inherit;cursor:pointer;}
@@ -248,6 +251,7 @@
       footer{flex-direction:column;gap:16px;text-align:center;padding:28px;}
     }
   </style>
+<noscript><style>.reveal{opacity:1;transform:none;}</style></noscript>
 </head>
 <body>
 <nav id="navbar">
