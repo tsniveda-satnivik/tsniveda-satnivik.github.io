@@ -3,6 +3,10 @@
 > Satnivik Tech is a boutique support infrastructure consulting firm for early-stage SaaS startups. We run fixed-scope support audits, set up helpdesks (Zendesk, Freshdesk, Intercom), design SOPs and escalation paths, and provide fractional support leadership.
 
 ## Services
+- [Helpdesk Setup](https://www.satniviktech.com/helpdesk-setup/): Zendesk, Freshdesk and Intercom setup for early-stage SaaS startups.
+- [SOPs and Escalation Paths](https://www.satniviktech.com/sop-process-design/): Support procedures, escalation paths and knowledge base design.
+- [Fractional Support](https://www.satniviktech.com/fractional-support/): Part-time support leadership without a full-time hire.
+- [About](https://www.satniviktech.com/about/): The team and how we work.
 
 - [Customer Support Audit](https://www.satniviktech.com/support-audit/): A fixed-scope review of your support setup. Delivered in 5 days as a PDF with a gap analysis, quick wins and a 30/60/90-day roadmap.
 - [Homepage](https://www.satniviktech.com/): Overview of services, the team, and how an engagement works.
