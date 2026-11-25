@@ -35,46 +35,40 @@
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
-  "@type": "ProfessionalService",
-  "name": "Satnivik Tech",
-  "url": "https://www.satniviktech.com/",
-  "logo": "https://www.satniviktech.com/og-image.png",
-  "description": "Boutique support infrastructure consulting for early-stage SaaS startups.",
-  "email": "consult@satniviktech.com",
-  "founder": { "@type": "Person", "name": "Niveda T S" },
-  "areaServed": "Worldwide",
-  "serviceType": ["Support audit", "Helpdesk setup", "SOP design", "Fractional support lead"]
-}
-
-</script>
-<script type="application/ld+json">
-{
-  "@context": "https://schema.org",
   "@graph": [
     {
-      "@type": "Organization",
+      "@type": "ProfessionalService",
+      "@id": "https://www.satniviktech.com/#organization",
       "name": "Satnivik Tech",
       "url": "https://www.satniviktech.com/",
       "logo": "https://www.satniviktech.com/logo-mark.png",
-      "sameAs": [
-        "https://www.linkedin.com/company/satnivik-tech"
-      ]
+      "image": "https://www.satniviktech.com/og-image.png",
+      "description": "Boutique support infrastructure consulting for early-stage SaaS startups.",
+      "email": "consult@satniviktech.com",
+      "areaServed": "Worldwide",
+      "serviceType": ["Support audit", "Helpdesk setup", "SOP design", "Fractional support lead"],
+      "founder": { "@id": "https://www.satniviktech.com/#niveda" },
+      "sameAs": ["https://www.linkedin.com/company/satnivik-tech"]
     },
     {
       "@type": "WebSite",
+      "@id": "https://www.satniviktech.com/#website",
       "name": "Satnivik Tech",
-      "url": "https://www.satniviktech.com/"
-    }
-  {
+      "url": "https://www.satniviktech.com/",
+      "publisher": { "@id": "https://www.satniviktech.com/#organization" }
+    },
+    {
       "@type": "Person",
+      "@id": "https://www.satniviktech.com/#niveda",
       "name": "Niveda T S",
-      "jobTitle": "Founder & Lead Consultant",
+      "jobTitle": "Founder and Lead Consultant",
       "worksFor": { "@id": "https://www.satniviktech.com/#organization" },
-      "url": "https://www.satniviktech.com/#about"
+      "url": "https://www.satniviktech.com/about/"
     }
   ]
 }
 </script>
+
   <link rel="preconnect" href="https://fonts.googleapis.com"/>
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
   <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;0,900;1,700&family=Outfit:wght@300;400;500;600&display=swap" rel="stylesheet"/>
